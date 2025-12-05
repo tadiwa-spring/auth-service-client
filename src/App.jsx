@@ -2,12 +2,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Navbar from './components/Navbar'; // NEW IMPORT
-import { AuthProvider, useAuth } from './context/AuthContext.jsx'; 
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword'; // NEW IMPORT
+import Navbar from './components/Navbar';
+import { AuthProvider, useAuth } from './context/AuthContext'; 
 
 const NotFound = () => <div style={{textAlign: 'center', marginTop: '2rem'}}>404 Not Found</div>;
 
-// --- Dedicated Protected Route Component (Guard) --- 
+// --- Dedicated Protected Route Component (Guard) ---
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
 
@@ -27,14 +29,18 @@ function App() {
   return (
     <AuthProvider>
       <div className="app-container">
-        <Navbar /> {/* <-- NAV BAR INTEGRATION HERE */}
+        <Navbar />
         
         <Routes>
           {/* Public Routes - Accessible to anyone */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
+          {/* Dynamic Route: Catches the token from the email link */}
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
 
-          {/* Protected Route - Uses the custom component for security */}
+          {/* Protected Route */}
           <Route 
             path="/profile" 
             element={

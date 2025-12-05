@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom'; // Import Navigate
-import { useAuth } from '../context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const { login, isAuthenticated } = useAuth(); // Use login function and isAuthenticated from context
