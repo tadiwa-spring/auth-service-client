@@ -2,10 +2,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword'; // NEW IMPORT
 import Navbar from './components/Navbar';
-import { AuthProvider, useAuth } from './context/AuthContext'; 
+import AuthProvider, { useAuth } from './context/AuthContext.jsx'; // FIX: AuthProvider is now the default export, imported as AuthProvider
 
 const NotFound = () => <div style={{textAlign: 'center', marginTop: '2rem'}}>404 Not Found</div>;
 
@@ -27,6 +25,7 @@ const ProtectedRoute = ({ children }) => {
 // --- App Component: Where routing is defined ---
 function App() {
   return (
+    // AuthProvider is now correctly referenced as the default import
     <AuthProvider>
       <div className="app-container">
         <Navbar />
@@ -35,11 +34,7 @@ function App() {
           {/* Public Routes - Accessible to anyone */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* Dynamic Route: Catches the token from the email link */}
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
-
           {/* Protected Route */}
           <Route 
             path="/profile" 

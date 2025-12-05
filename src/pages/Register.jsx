@@ -24,7 +24,7 @@ const Register = () => {
 
     try {
       await registerUser(formData);
-      alert('Registration successful! Please log in.'); // Using alert temporarily
+      alert('Registration successful! Please log in.');
       navigate('/login');
     } catch (err) {
       setError(err.message);

@@ -19,6 +19,7 @@ const Navbar = () => {
     cursor: 'pointer',
     backgroundColor: 'transparent',
     fontWeight: 'bold',
+    outline: 'none',
   };
 
   return (
@@ -32,12 +33,10 @@ const Navbar = () => {
         boxShadow: '0 2px 4px rgba(0,0,0,0.2)' 
       }}
     >
-      {/* Brand/Home Link */}
       <Link to="/" style={{ color: '#fff', fontSize: '1.5rem', fontWeight: 'bold', textDecoration: 'none' }}>
         AuthApp
       </Link>
 
-      {/* Navigation Links (Right Side) */}
       <div>
         {isAuthenticated ? (
           // --- Logged In State ---
@@ -45,20 +44,23 @@ const Navbar = () => {
             <span style={{ color: '#adb5bd', fontSize: '0.9rem' }}>
               Welcome, {currentUser ? currentUser.username : 'User'}!
             </span>
-            <Link to="/profile" style={{ ...navItemStyle, backgroundColor: '#007bff' }}>
+            <Link to="/profile" style={{ ...navItemStyle, backgroundColor: '#007bff', textDecoration: 'none' }}>
               Profile
             </Link>
-            <button onClick={logout} style={{ ...navButtonStyle, color: '#ffc107', marginLeft: '0.5rem' }}>
+            <button 
+              onClick={logout} 
+              style={{ ...navButtonStyle, color: '#ffc107', marginLeft: '0.5rem', textDecoration: 'none' }}
+            >
               Logout
             </button>
           </div>
         ) : (
           // --- Logged Out State ---
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <Link to="/login" style={{ ...navItemStyle, backgroundColor: '#28a745' }}>
+            <Link to="/login" style={{ ...navItemStyle, backgroundColor: '#28a745', textDecoration: 'none' }}>
               Login
             </Link>
-            <Link to="/register" style={{ ...navItemStyle, backgroundColor: '#6c757d' }}>
+            <Link to="/register" style={{ ...navItemStyle, backgroundColor: '#6c757d', textDecoration: 'none' }}>
               Register
             </Link>
           </div>

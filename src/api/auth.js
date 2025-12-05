@@ -30,7 +30,7 @@ export const getProfile = async () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` // Sends the JWT token for authorization
+      'Authorization': `Bearer ${token}`
     },
   });
 

@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom'; // Import Navigate
+import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
-  const { login, isAuthenticated } = useAuth(); // Use login function and isAuthenticated from context
+  const { login, isAuthenticated } = useAuth();
   
   const [formData, setFormData] = useState({
-    username: '', 
+    username: '', // Must match the backend payload field name
     password: '',
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  // Guard: If user is already authenticated, redirect them away from login page
+  // Local Guard: If user is authenticated, redirect to profile instantly
   if (isAuthenticated) {
       return <Navigate to="/profile" replace />;
   }
@@ -27,10 +27,10 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // Use the centralized login function
       await login(formData); 
     } catch (err) {
       console.error("Login Error:", err);
+      // Display the error message returned from the backend/API
       setError(err.message || 'Login failed. Check your credentials.');
     } finally {
       setIsLoading(false);
